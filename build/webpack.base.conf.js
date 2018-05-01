@@ -1,20 +1,21 @@
 const path = require('path')
 const webpack = require('webpack')
 // const vueLoaderConfig = require('./vue-loader.conf')
-
+const isProd = process.env.NODE_ENV === 'production'
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
 module.exports = {
+  // noParse: /es6-promise\.js$/, // avoid webpack shimming process
   context: path.resolve(__dirname, '../'),
-  // entry: {
-  //   app: './src/main.js'
-  // },
+  devtool: isProd
+    ? false
+    : '#cheap-module-source-map',
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: '[name].js',
-    publicPath: '/'
+    publicPath: '/dist/',
+    filename: '[name].[chunkhash].js'
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
