@@ -2,23 +2,23 @@
   <div v-on:click='doClick' class="wrapper">
     <h3 class="blogtitle">
       <span>
-        <a href="/jstt/css3/" title="css3" target="_blank" class="classname">个人博客</a>
+        <a href="/jstt/css3/" title="css3" target="_blank" class="classname">{{ blog_type_str }}</a>
       </span>
-      <a href="/jstt/css3/2018-03-26/812.html" target="_blank">帝国cms 首页或者列表无图，不使用默认图片的方法</a>
+      <a href="/jstt/css3/2018-03-26/812.html" target="_blank">{{ blog_title }}</a>
     </h3>
     <div class="bloginfo">
       <span class="blogpic">
-        <a href="/jstt/css3/2018-03-26/812.html" title="帝国cms 首页或者列表无图，不使用默认图片的方法">
-          <img src="images/t01.jpg" alt="帝国cms 首页或者列表无图，不使用默认图片的方法" />
+        <a href="/jstt/css3/2018-03-26/812.html" v-bind:title='blog_title'>
+          <img src="images/t01.jpg" v-bind:alt='blog_title' />
         </a>
       </span>
-      <p>帝国cms列表页图文展示，或者首页图文展示，如果使用全图和文字，编辑起来比较麻烦，因为每一篇文章，你都得花时间去配图，所以，可有使用以下方法来实现。</p>
+      <p>{{ blog_intro }}</p>
     </div>
     <div class="autor">
       <span class="lm f_l"></span>
-      <span class="dtime f_l">2018-03-26</span>
+      <span class="dtime f_l">{{ blog_create_date }}</span>
       <span class="viewnum f_l">浏览（
-        <a href="/">1429</a>）</span>
+        <a href="/">{{ blog_read_count }}</a>）</span>
       <span class="f_r">
         <a href="/jstt/css3/2018-03-26/812.html" class="more">阅读原文>></a>
       </span>
@@ -31,6 +31,15 @@
 // import 'lib/normalize.css/normalize.css'
 // import '@/common/styles/common.css'
 export default {
+  props: [
+    'blog_type',
+    'blog_type_str',
+    'blog_title',
+    'blog_img',
+    'blog_intro',
+    'blog_create_date',
+    'blog_read_count'
+  ],
   methods: {
     doClick: function (e) {
       console.log(e)

@@ -3,7 +3,7 @@
     <blog-header class='header'/>
     <div class='main'>
       <div class="article">
-        <blog-article />
+        <blog-article v-bind:blogList='blogList'/>
       </div>
       <div class="classify">
         <blog-classify />
@@ -18,6 +18,16 @@ import Article from '@/components/list'
 import Footer from '@/components/footer'
 import Classify from '@/components/classify'
 export default {
+  asyncData ({ store, router }) {
+    debugger
+    //  触发action后， 会返回Promise
+    return store.dispatch('fetchBlogList', router.params.blogType)
+  },
+  computed: {
+    blogList () {
+      return this.$store.state.blogList
+    }
+  },
   components: {
     BlogHeader: Header,
     BlogArticle: Article,

@@ -8,7 +8,7 @@ var server = express()
 const { createBundleRenderer } = require('vue-server-renderer')
 const serverBundle = require('../dist/vue-ssr-server-bundle.json')
 const clientManifest = require('../dist/vue-ssr-client-manifest')
-const template = require('fs').readFileSync(__dirname + '/index.template.html', 'utf-8')
+const template = require('fs').readFileSync(path.resolve(__dirname, './index.template.html'), 'utf-8')
 
 // 1.创建vue根实例
 // 2.创建renderer
@@ -24,7 +24,7 @@ const renderer = createBundleRenderer(serverBundle, {
   template,
   clientManifest
 })
-server.use(express.static(path.resolve(__dirname + '/../dist')));
+server.use(express.static(path.resolve(__dirname, '../dist')))
 server.get('*', (req, res) => {
   const context = {
     title: 'vue-ssr',
@@ -38,14 +38,17 @@ server.get('*', (req, res) => {
   // const app = createApp(context)
   renderer.renderToString(context, (err, html) => {
     if (err) {
-      console.log(err)
-      res.status(500).end('Internal Server Error')
-      return
+      if (err.code === 404) {
+        res.status(404).end('Page not found')
+      } else {
+        res.status(500).end('internal Server Error')
+      }
+    } else {
+      res.end(html)
     }
-    res.end(html)
   })
 })
 
 server.listen(8080, (msg) => {
-  console.log(msg, 'started!')
+  console.log('started!')
 })
