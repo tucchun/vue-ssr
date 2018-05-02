@@ -3,7 +3,7 @@
     <blog-header class='header'/>
     <div class='main'>
       <div class="article">
-        <blog-article v-bind:blogList='blogList'/>
+        <blog-article v-on:clickSummary='clickSummary' v-bind:blogList='blogList'/>
       </div>
       <div class="classify">
         <blog-classify />
@@ -18,14 +18,19 @@ import Article from '@/components/list'
 import Footer from '@/components/footer'
 import Classify from '@/components/classify'
 export default {
-  asyncData ({ store, router }) {
-    debugger
+  asyncData ({ store, route }) {
     //  触发action后， 会返回Promise
-    return store.dispatch('fetchBlogList', router.params.blogType)
+    let blogType = route && route.params ? route.params.blogType : ''
+    return store.dispatch('fetchBlogList', blogType)
   },
   computed: {
     blogList () {
       return this.$store.state.blogList
+    }
+  },
+  methods: {
+    clickSummary (blogId) {
+      this.$router.push(`info/${blogId}`)
     }
   },
   components: {

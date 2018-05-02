@@ -2,13 +2,13 @@
   <div v-on:click='doClick' class="wrapper">
     <h3 class="blogtitle">
       <span>
-        <a href="/jstt/css3/" title="css3" target="_blank" class="classname">{{ blog_type_str }}</a>
+        <a href="javascript:void(0)" title="css3" target="_blank" class="classname">{{ blog_type_str }}</a>
       </span>
-      <a href="/jstt/css3/2018-03-26/812.html" target="_blank">{{ blog_title }}</a>
+      <a href="javascript:void(0)" target="_blank">{{ blog_title }}</a>
     </h3>
     <div class="bloginfo">
       <span class="blogpic">
-        <a href="/jstt/css3/2018-03-26/812.html" v-bind:title='blog_title'>
+        <a href="javascript:void(0)" v-bind:title='blog_title'>
           <img src="images/t01.jpg" v-bind:alt='blog_title' />
         </a>
       </span>
@@ -20,7 +20,7 @@
       <span class="viewnum f_l">浏览（
         <a href="/">{{ blog_read_count }}</a>）</span>
       <span class="f_r">
-        <a href="/jstt/css3/2018-03-26/812.html" class="more">阅读原文>></a>
+        <a href="javascript:void(0)" class="more">阅读原文>></a>
       </span>
     </div>
     <div class="line"></div>
@@ -32,6 +32,7 @@
 // import '@/common/styles/common.css'
 export default {
   props: [
+    'blog_id',
     'blog_type',
     'blog_type_str',
     'blog_title',
@@ -42,7 +43,7 @@ export default {
   ],
   methods: {
     doClick: function (e) {
-      console.log(e)
+      this.$emit('clickSummary', this.blog_id)
     }
   }
 }

@@ -4,7 +4,7 @@
     <!-- <h2 class="hometitle">最新文章</h2> -->
     <ul>
       <li v-for='item in blogList' v-bind:key='item.id'>
-        <Item v-bind='item'/>
+        <Item v-on:clickSummary='clickSummary' v-bind='item'/>
       </li>
     </ul>
   </div>
@@ -23,6 +23,11 @@ export default {
   components: {
     HomeTitle,
     Item: Summary
+  },
+  methods: {
+    clickSummary (blogId) {
+      this.$emit('clickSummary', blogId)
+    }
   }
 }
 </script>

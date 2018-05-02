@@ -9,8 +9,8 @@ export function fetchBlogList (blogType) {
     'blog_create_date',
     'blog_read_count'
      */
-    debugger
     resolve([{
+      blog_id: '1',
       blog_type: 'vue books',
       blog_type_str: 'vue books',
       blog_title: 'vue books',

@@ -5,6 +5,7 @@
 const path = require('path')
 const fs = require('fs')
 const express = require('express')
+const favicon = require('serve-favicon')
 const app = express()
 const resolve = file => path.resolve(__dirname, file)
 const { createBundleRenderer } = require('vue-server-renderer')
@@ -89,6 +90,7 @@ function render (req, res) {
 }
 
 app.use(express.static(path.resolve(__dirname, './dist')))
+app.use(favicon('./build/logo.png'))
 app.get('*', isProd ? render : (req, res) => {
   readyPromise.then(() => render(req, res))
 })

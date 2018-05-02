@@ -14,14 +14,12 @@ export function createStore () {
         // `store.dispatch()` 会返回 Promise
         // 以便我们能够知道数据在何时更新
         return fetchBlogList(blogType).then(list => {
-          console.log(list)
           commit('setItem', { blogType, list })
         })
       }
     },
     mutations: {
       setItem (state, { blogType, list }) {
-        debugger
         state.blogList = list
         // Vue.set(state.blogList, list)
       }

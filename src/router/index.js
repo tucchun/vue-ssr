@@ -9,7 +9,11 @@ export function createRouter () {
     routes: [
       {
         path: '/',
-        component: () => import('@/page/Index.vue')
+        component: () => import('@/views/Index.vue')
+      },
+      {
+        path: '/info/:blogId',
+        component: () => import('@/views/Info.vue')
       }
     ]
   })

@@ -9,9 +9,9 @@ function resolve (dir) {
 module.exports = {
   // noParse: /es6-promise\.js$/, // avoid webpack shimming process
   context: path.resolve(__dirname, '../'),
-  devtool: isProd
-    ? false
-    : '#cheap-module-source-map',
+  // devtool: isProd
+  //   ? false
+  //   : '#cheap-module-source-map',
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/dist/',
